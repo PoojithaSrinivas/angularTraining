@@ -1,9 +1,9 @@
 import { Component, OnInit  } from '@angular/core'
-
-import { NgForm } from '@angular/forms';
-import { UserService } from '../service/user.service';
+import { Router } from '@angular/router';
+import { UserService } from '../../service/user.service';
 import { ToastrService } from 'ngx-toastr';    
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -16,9 +16,16 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   submitted = false;
   
-  constructor(private userService: UserService, private toastr: ToastrService,private formBuilder: FormBuilder) { }
+  constructor(
+    private userService: UserService, 
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    public route: ActivatedRoute) { }
     
   ngOnInit() {
+    
+    
     this.registrationForm = this.formBuilder.group({
       name: ['', Validators.required],
       mobileno: ['', Validators.required],
@@ -55,7 +62,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe((data: any) => {console.log(data);
         if ("id" in data) {
           this.toastr.success('User registration successful');
-          //this.registrationForm.reset();
+          this.redirectToHome(data);
         }
         else
           this.toastr.error("Could not Register the user. Please try again later.");
@@ -72,6 +79,10 @@ export class RegistrationComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.registrationForm.reset();
-}
+  }
+
+  redirectToHome(data){
+    this.router.navigate(["/home", data]);
+  }
 
 }

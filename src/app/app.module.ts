@@ -5,15 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';    
 import { ToastrModule } from 'ngx-toastr';  
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './component/registration/registration.component';
+import { HomeComponent } from './component/home/home.component';
+import { Routes, RouterModule } from '@angular/router';
 
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HomeComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -21,10 +27,15 @@ import { RegistrationComponent } from './registration/registration.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: '', component: RegistrationComponent },
+      { path: 'home', component: HomeComponent }
+    ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }
 

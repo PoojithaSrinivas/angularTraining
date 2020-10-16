@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-import { User } from './model/user.model';
+import { User } from '../model/user.model';
 
 
 @Injectable({
