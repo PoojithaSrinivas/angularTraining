@@ -69,11 +69,7 @@ export class RegistrationComponent implements OnInit {
       });
       
 
-        // stop here if form is invalid
-        
-
-        // display form values on success
-        //alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registrationForm.value, null, 4));
+       
   }
 
   onReset() {
